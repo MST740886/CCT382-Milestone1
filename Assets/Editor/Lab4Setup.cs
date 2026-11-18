@@ -13,8 +13,6 @@ public static class Lab4Setup
     private const string LookReferencePath = "Assets/Input system/LookActionReference.asset";
     private const string DustPrefabPath = "Assets/Prefabs/RunDustPuff.prefab";
     private const string DustMaterialPath = "Assets/Prefabs/RunDustMaterial.mat";
-
-    [MenuItem("Lab 4/Refresh Dust Effect Prefab")]
     private static void RefreshDustEffectPrefab()
     {
         string folder = Path.GetDirectoryName(DustPrefabPath);
@@ -24,8 +22,6 @@ public static class Lab4Setup
         AssetDatabase.SaveAssets();
         Debug.Log("Run dust prefab refreshed with upward, higher-contrast particles.");
     }
-
-    [MenuItem("Lab 4/Finish Camera and Dust Setup")]
     private static void FinishCameraAndDustSetup()
     {
         Scene scene = SceneManager.GetActiveScene();

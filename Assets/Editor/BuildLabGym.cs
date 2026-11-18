@@ -55,7 +55,6 @@ public static class BuildLabGym
         }
         Label(name.ToUpper(),new Vector3(x,2.65f,7.78f),48,Color.white,.08f);
     }
-    [MenuItem("Lab 1/Build three-room gym")]
     public static void Build()
     {
         Directory.CreateDirectory("Assets/LabGym/Materials"); Directory.CreateDirectory("Assets/LabGym/Settings");

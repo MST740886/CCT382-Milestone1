@@ -12,6 +12,11 @@ public class MovementInput : MonoBehaviour
     [Header("Movement")]
     [SerializeField, Min(0f)] private float moveSpeed = 4f;
     [SerializeField, Min(0f)] private float sprintSpeed = 6f;
+    [Header("Carry weight")]
+    [SerializeField] private FloatVariableSO currentCarryWeight;
+    [SerializeField, Min(0f)] private float encumbranceThreshold = 5f;
+    [SerializeField, Range(0f, 1f)] private float encumberedWalkSpeedMultiplier = 0.5f;
+    [SerializeField, Range(0f, 1f)] private float encumberedSprintSpeedMultiplier = 0.6666667f;
     [SerializeField, Min(0f)] private float jumpHeight = 1.2f;
     [SerializeField, Min(0.01f)] private float jumpBufferTime = 0.15f;
     [SerializeField, Min(0.01f)] private float groundProbeDistance = 0.18f;
@@ -114,7 +119,16 @@ public class MovementInput : MonoBehaviour
         input = Vector2.ClampMagnitude(input, 1f);
         bool isMoving = input.sqrMagnitude > 0.001f;
         bool isSprinting = isMoving && sprintAction != null && sprintAction.IsPressed();
+        bool isEncumbered = currentCarryWeight != null &&
+                            currentCarryWeight.value >= encumbranceThreshold;
         float currentSpeed = isSprinting ? sprintSpeed : moveSpeed;
+        if (isEncumbered)
+        {
+            float speedMultiplier = isSprinting
+                ? encumberedSprintSpeedMultiplier
+                : encumberedWalkSpeedMultiplier;
+            currentSpeed *= speedMultiplier;
+        }
 
         if (backstepRequested)
         {

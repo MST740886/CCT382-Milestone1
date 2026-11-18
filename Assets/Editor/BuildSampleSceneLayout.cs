@@ -12,8 +12,6 @@ public static class BuildSampleSceneLayout
     const string RootName = "Lab 1 - Three Level Rooms";
     static Transform root;
     static Material existingMaterial;
-
-    [MenuItem("Lab 1/Build simple layout in SampleScene")]
     public static void Build()
     {
         var scene = SceneManager.GetActiveScene();
